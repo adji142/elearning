@@ -153,7 +153,7 @@
 			// $('#NomorIndukGuru').attr('readonly',true);
 			$.ajax({
               type: "post",
-              url: "<?=base_url()?>siswa/read",
+              url: "<?=base_url()?>Siswa/read",
               data: {'id':''},
               dataType: "json",
               success: function (response) {
