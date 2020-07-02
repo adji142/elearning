@@ -39,4 +39,16 @@ class home extends CI_Controller {
 	{
 		$this->load->view('masterkelas');
 	}
+	public function guru()
+	{
+		$this->load->view('daftarguru');
+	}
+	public function siswa()
+	{
+		$this->load->view('daftarsiswa');
+	}
+	public function pembelajaran()
+	{
+		$this->load->view('daftarpembelajaran');
+	}
 }

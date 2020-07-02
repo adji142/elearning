@@ -55,3 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['mapel'] = 'Home/mapel';
 $route['kelas'] = 'Home/kelas';
+$route['guru'] = 'Home/guru';
+$route['siswa'] = 'Home/siswa';
+$route['pembelajaran'] = 'Home/pembelajaran';

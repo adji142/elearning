@@ -46,6 +46,7 @@ class Auth extends CI_Controller {
 			if($pass_valid == $pwd){
 				$sess_data['userid']=$userid;
 				$sess_data['NamaUser'] = $Validate_username->row()->nama;
+				$sess_data['username'] = $Validate_username->row()->username;
 				$this->session->set_userdata($sess_data);
 				$data['success'] = true;
 				$data['username'] = $Validate_username->row()->username;

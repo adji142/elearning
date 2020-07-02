@@ -1,3 +1,9 @@
+<?php
+    $user_id = $this->session->userdata('userid');
+    if($user_id != ''){
+        echo "<script>location.replace('".base_url()."home');</script>";
+    }
+?>
 <!DOCTYPE html>
 <head>
 <title>E - Learning Apps | Login ke Aplikasi</title>
