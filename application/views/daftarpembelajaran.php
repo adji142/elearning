@@ -226,7 +226,11 @@
             });
         }
 		function bindGrid(data) {
-
+			var x = $('#hakakes').val();
+			var allowAdding = true;
+			if (x == 3) {
+				allowAdding = false;
+			}
 	        $("#gridContainer").dxDataGrid({
 	            allowColumnResizing: true,
 	            dataSource: data,
@@ -244,9 +248,9 @@
 	            },
 	            editing: {
 	                mode: "row",
-	                allowAdding:true,
-	                allowUpdating: true,
-	                allowDeleting: true,
+	                allowAdding:allowAdding,
+	                allowUpdating: allowAdding,
+	                allowDeleting: allowAdding,
 	                texts: {
 	                    confirmDeleteMessage: ''  
 	                }

@@ -48,6 +48,10 @@ class Pembelajaran extends CI_Controller {
 			if ($rs->num_rows() > 0) {
 				$sql .= " AND a.NIKGuru = '".$username."' ";
 			}
+			$rs_siswa = $this->ModelsExecuteMaster->FindData(array('NISN'=>$username),'tsiswa');
+			if ($rs_siswa->num_rows()>0) {
+				$sql .= " AND a.KelasID = ".$rs_siswa->row()->KelasID;
+			}
 		}
 		else{
 			$sql = "SELECT 
@@ -63,6 +67,11 @@ class Pembelajaran extends CI_Controller {
 			$rs = $this->ModelsExecuteMaster->FindData(array('NomorIndukGuru'=>$username),'tguru');
 			if ($rs->num_rows() > 0) {
 				$sql .= " AND a.NIKGuru = '".$username."' ";
+			}
+			$rs_siswa = $this->ModelsExecuteMaster->FindData(array('NISN'=>$username),'tsiswa');
+			
+			if ($rs_siswa->num_rows()>0) {
+				$sql .= " AND a.KelasID = ".$rs_siswa->row()->KelasID;
 			}
 		}
 		// var_dump($sql);

@@ -2,6 +2,7 @@
   $user_id = $this->session->userdata('userid');
   $NamaUser = $this->session->userdata('NamaUser');
   $username = $this->session->userdata('username');
+  $hakakes = $this->session->userdata('hakakes');
   // var_dump($username);
   if($user_id == ''){
     echo "<script>location.replace('".base_url()."home');</script>";
@@ -10,6 +11,7 @@
 ?>
 <!DOCTYPE html>
 <head>
+<input type="hidden" name="hakakes" id="hakakes" value="<?php echo $hakakes; ?>">
 <title>E - Learning SMP xxxx</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

@@ -47,6 +47,8 @@ class Auth extends CI_Controller {
 				$sess_data['userid']=$userid;
 				$sess_data['NamaUser'] = $Validate_username->row()->nama;
 				$sess_data['username'] = $Validate_username->row()->username;
+				$sess_data['hakakes'] = $Validate_username->row()->HakAkses;
+				
 				$this->session->set_userdata($sess_data);
 				$data['success'] = true;
 				$data['username'] = $Validate_username->row()->username;
