@@ -207,7 +207,7 @@
 
             $.ajax({
                 type    :'post',
-                url     : '<?=base_url()?>siswa/CRUD',
+                url     : '<?=base_url()?>Siswa/CRUD',
                 data    : me.serialize(),
                 dataType: 'json',
                 success : function (response) {
@@ -259,7 +259,7 @@
             var table = 'tsiswa';
             $.ajax({
               type: "post",
-              url: "<?=base_url()?>siswa/read",
+              url: "<?=base_url()?>Siswa/read",
               data: {'NISN':$('#NISN').val()},
               dataType: "json",
               success: function (response) {
@@ -323,7 +323,7 @@
             var table = 'tguru';
             $.ajax({
               type: "post",
-              url: "<?=base_url()?>siswa/read",
+              url: "<?=base_url()?>Siswa/read",
               data: {'id':id},
               dataType: "json",
               success: function (response) {
@@ -481,7 +481,7 @@
 
 	                    $.ajax({
 	                        type    :'post',
-	                        url     : '<?=base_url()?>siswa/CRUD',
+	                        url     : '<?=base_url()?>Siswa/CRUD',
 	                        data    : {'id':id,'formtype':'delete'},
 	                        dataType: 'json',
 	                        success : function (response) {

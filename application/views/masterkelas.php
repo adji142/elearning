@@ -90,7 +90,7 @@
 
             $.ajax({
                 type    :'post',
-                url     : '<?=base_url()?>mstr_kelas/CRUD',
+                url     : '<?=base_url()?>Mstr_kelas/CRUD',
                 data    : me.serialize(),
                 dataType: 'json',
                 success : function (response) {
@@ -228,7 +228,7 @@
 
 	                    $.ajax({
 	                        type    :'post',
-	                        url     : '<?=base_url()?>mstr_kelas/CRUD',
+	                        url     : '<?=base_url()?>Mstr_kelas/CRUD',
 	                        data    : {'id':id,'formtype':'delete'},
 	                        dataType: 'json',
 	                        success : function (response) {

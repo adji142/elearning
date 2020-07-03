@@ -90,7 +90,7 @@
 
             $.ajax({
                 type    :'post',
-                url     : '<?=base_url()?>mstr_mapel/CRUD',
+                url     : '<?=base_url()?>Mstr_mapel/CRUD',
                 data    : me.serialize(),
                 dataType: 'json',
                 success : function (response) {
@@ -228,7 +228,7 @@
 
 	                    $.ajax({
 	                        type    :'post',
-	                        url     : '<?=base_url()?>mstr_mapel/CRUD',
+	                        url     : '<?=base_url()?>Mstr_mapel/CRUD',
 	                        data    : {'id':id,'formtype':'delete'},
 	                        dataType: 'json',
 	                        success : function (response) {

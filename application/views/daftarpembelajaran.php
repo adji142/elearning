@@ -121,7 +121,7 @@
 		$(document).ready(function () {
 			$.ajax({
               type: "post",
-              url: "<?=base_url()?>pembelajaran/read",
+              url: "<?=base_url()?>Pembelajaran/read",
               data: {'id':''},
               dataType: "json",
               success: function (response) {
@@ -146,7 +146,7 @@
 
             $.ajax({
                 type    :'post',
-                url     : '<?=base_url()?>pembelajaran/CRUD',
+                url     : '<?=base_url()?>Pembelajaran/CRUD',
                 data    : me.serialize(),
                 dataType: 'json',
                 success : function (response) {
@@ -204,7 +204,7 @@
             var table = 'tkelas';
             $.ajax({
               type: "post",
-              url: "<?=base_url()?>pembelajaran/read",
+              url: "<?=base_url()?>Pembelajaran/read",
               data: {'id':id},
               dataType: "json",
               success: function (response) {
@@ -342,7 +342,7 @@
 
 	                    $.ajax({
 	                        type    :'post',
-	                        url     : '<?=base_url()?>pembelajaran/CRUD',
+	                        url     : '<?=base_url()?>Pembelajaran/CRUD',
 	                        data    : {'id':id,'formtype':'delete'},
 	                        dataType: 'json',
 	                        success : function (response) {

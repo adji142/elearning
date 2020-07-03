@@ -147,7 +147,7 @@
 			// $('#NomorIndukGuru').attr('readonly',true);
 			$.ajax({
               type: "post",
-              url: "<?=base_url()?>guru/read",
+              url: "<?=base_url()?>Guru/read",
               data: {'id':''},
               dataType: "json",
               success: function (response) {
@@ -201,7 +201,7 @@
 
             $.ajax({
                 type    :'post',
-                url     : '<?=base_url()?>guru/CRUD',
+                url     : '<?=base_url()?>Guru/CRUD',
                 data    : me.serialize(),
                 dataType: 'json',
                 success : function (response) {
@@ -253,7 +253,7 @@
             var table = 'tguru';
             $.ajax({
               type: "post",
-              url: "<?=base_url()?>guru/read",
+              url: "<?=base_url()?>Guru/read",
               data: {'NomorIndukGuru':$('#NomorIndukGuru').val()},
               dataType: "json",
               success: function (response) {
@@ -316,7 +316,7 @@
             var table = 'tguru';
             $.ajax({
               type: "post",
-              url: "<?=base_url()?>guru/read",
+              url: "<?=base_url()?>Guru/read",
               data: {'id':id},
               dataType: "json",
               success: function (response) {
@@ -469,7 +469,7 @@
 
 	                    $.ajax({
 	                        type    :'post',
-	                        url     : '<?=base_url()?>guru/CRUD',
+	                        url     : '<?=base_url()?>Guru/CRUD',
 	                        data    : {'id':id,'formtype':'delete'},
 	                        dataType: 'json',
 	                        success : function (response) {
