@@ -107,7 +107,8 @@ class Siswa extends CI_Controller {
 			'nama'			=> $NamaSiswa,
 			'password'		=> $this->encryption->encrypt($NISN),
 			'createdby'		=> $LastUpdatedby,
-			'createdon'		=> date("Y-m-d h:i:sa")
+			'createdon'		=> date("Y-m-d h:i:sa"),
+			'HakAkses'		=> 3
 		);
 		if ($formtype == 'add') {
 			$this->db->trans_begin();

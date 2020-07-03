@@ -104,7 +104,8 @@ class Guru extends CI_Controller {
 			'nama'			=> $NamaGuru,
 			'password'		=> $this->encryption->encrypt($NomorIndukGuru),
 			'createdby'		=> $LastUpdatedby,
-			'createdon'		=> date("Y-m-d h:i:sa")
+			'createdon'		=> date("Y-m-d h:i:sa"),
+			'HakAkses'		=> 2
 		);
 		if ($formtype == 'add') {
 			$this->db->trans_begin();

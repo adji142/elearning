@@ -37,7 +37,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Kode Mata Pelajaran</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="KodeMapel" name="KodeMapel" placeholder="Kode Mata Pelajaran" required="">
+	                            <input type="text" class="form-control" id="KodeMapel" name="KodeMapel" placeholder="Kode Mata Pelajaran" required="" autocomplete="off">
 	                            <input type="hidden" name="id" id="id" >
 	                            <input type="hidden" name="formtype" id="formtype" value="add">
 	                        </div>
@@ -45,7 +45,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Nama Mata Pelajaran</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NamaMapel" name="NamaMapel" placeholder="Nama Mata Pelajaran" required="">
+	                            <input type="text" class="form-control" id="NamaMapel" name="NamaMapel" placeholder="Nama Mata Pelajaran" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">

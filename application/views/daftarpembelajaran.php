@@ -39,7 +39,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Mata Pelajaran</label>
 	                        <div class="col-lg-8">
-	                        	<input list="listMapel" name="MapelID" id="MapelID" class="form-control">
+	                        	<input list="listMapel" name="MapelID" id="MapelID" class="form-control" autocomplete="off">
 	                            <datalist id="listMapel" >
 	                            	<?php
 	                            		$rs = $this->db->query("select * from tmapel order by KodeMapel")->result();
@@ -53,7 +53,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Guru</label>
 	                        <div class="col-lg-8">
-	                        	<input list="listGuru" name="NIKGuru" id="NIKGuru" class="form-control">
+	                        	<input list="listGuru" name="NIKGuru" id="NIKGuru" class="form-control" autocomplete="off">
 	                            <datalist id="listGuru" >
 	                            	<?php
 	                            		$rs = $this->db->query("select * from tguru order by NamaGuru")->result();
@@ -67,7 +67,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Kelas</label>
 	                        <div class="col-lg-8">
-	                        	<input list="listKelas" name="KelasID" id="KelasID" class="form-control">
+	                        	<input list="listKelas" name="KelasID" id="KelasID" class="form-control" autocomplete="off">
 	                            <datalist id="listKelas" >
 	                            	<?php
 	                            		$rs = $this->db->query("select * from tkelas order by KodeKelas")->result();

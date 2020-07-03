@@ -37,7 +37,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Nomer Induk Guru</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NomorIndukGuru" name="NomorIndukGuru" placeholder="Nomer Induk Guru" required="">
+	                            <input type="text" class="form-control" id="NomorIndukGuru" name="NomorIndukGuru" placeholder="Nomer Induk Guru" required="" autocomplete="off">
 	                            <input type="hidden" name="id" id="id" >
 	                            <input type="hidden" name="formtype" id="formtype" value="add">
 	                        </div>
@@ -45,13 +45,13 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Nama Guru</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NamaGuru" name="NamaGuru" placeholder="Nama Guru" required="">
+	                            <input type="text" class="form-control" id="NamaGuru" name="NamaGuru" placeholder="Nama Guru" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Mata Pelajaran di Ampu</label>
 	                        <div class="col-lg-8">
-	                        	<input list="listMapel" name="MapelDiAmpu" id="MapelDiAmpu" class="form-control">
+	                        	<input list="listMapel" name="MapelDiAmpu" id="MapelDiAmpu" class="form-control" autocomplete="off">
 	                            <datalist id="listMapel" >
 	                            	<?php
 	                            		$rs = $this->db->query("select * from tmapel order by KodeMapel")->result();
@@ -65,38 +65,38 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Email Guru</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="Email" name="Email" placeholder="Email" required="">
+	                            <input type="text" class="form-control" id="Email" name="Email" placeholder="Email" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Nomor Telepon</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NoTlp" name="NoTlp" placeholder="No. Telepon" required="">
+	                            <input type="text" class="form-control" id="NoTlp" name="NoTlp" placeholder="No. Telepon" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Alamat</label>
 	                        <div class="col-lg-8">
-	                        	<textarea class="form-control" id="Alamat" name="Alamat" placeholder="No. Telepon" required="">
+	                        	<textarea class="form-control" id="Alamat" name="Alamat" placeholder="No. Telepon" required="" autocomplete="off">
 	                        	</textarea>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Tempat Lahir</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="TempatLahir" name="TempatLahir" placeholder="Tempat Lahir" required="">
+	                            <input type="text" class="form-control" id="TempatLahir" name="TempatLahir" placeholder="Tempat Lahir" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Tanggal Lahir</label>
 	                        <div class="col-lg-8">
-	                            <input type="date" class="form-control" id="TanggalLahir" name="TanggalLahir" placeholder="Tanggal Lahir" required="">
+	                            <input type="date" class="form-control" id="TanggalLahir" name="TanggalLahir" placeholder="Tanggal Lahir" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Agama</label>
 	                        <div class="col-lg-8">
-	                            <select id="Agama" name="Agama" class="form-control" required="">
+	                            <select id="Agama" name="Agama" class="form-control" required="" autocomplete="off">
 	                            	<option value="Kristen">Kristen</option>
 	                            	<option value="Islam">Islam</option>
 	                            	<option value="Hindu">Hindu</option>
@@ -108,7 +108,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Jenis Kelamin</label>
 	                        <div class="col-lg-8">
-	                            <select id="Gender" name="Gender" class="form-control" required="">
+	                            <select id="Gender" name="Gender" class="form-control" required="" autocomplete="off">
 	                            	<option value="L">Laki - Laki</option>
 	                            	<option value="P">Perempuan</option>
 	                            </select>

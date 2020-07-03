@@ -37,7 +37,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Kode Kelas</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="KodeKelas" name="KodeKelas" placeholder="Kode Kelas" required="">
+	                            <input type="text" class="form-control" id="KodeKelas" name="KodeKelas" placeholder="Kode Kelas" required="" autocomplete="off">
 	                            <input type="hidden" name="id" id="id" >
 	                            <input type="hidden" name="formtype" id="formtype" value="add">
 	                        </div>
@@ -45,7 +45,7 @@
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Nama Kelas</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NamaKelas" name="NamaKelas" placeholder="Nama Kelas" required="">
+	                            <input type="text" class="form-control" id="NamaKelas" name="NamaKelas" placeholder="Nama Kelas" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
