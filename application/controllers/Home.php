@@ -51,4 +51,24 @@ class home extends CI_Controller {
 	{
 		$this->load->view('daftarpembelajaran');
 	}
+	public function soal()
+	{
+		$this->load->view('daftarmanagementsoal');
+	}
+	public function addsoal($value)
+	{
+		$rs = $this->ModelsExecuteMaster->FindData(array('id'=>$value),'topiksoal');
+		$data['topikid'] = $value;
+		$data['topikname'] = $rs->row()->Keterangan;
+		$data['loadtype'] = '1'; // 1: add soal. 2: preview soal
+		$this->load->view('addsoal',$data);	
+	}
+	public function viewsoal($value)
+	{
+		$rs = $this->ModelsExecuteMaster->FindData(array('id'=>$value),'topiksoal');
+		$data['topikid'] = $value;
+		$data['topikname'] = $rs->row()->Keterangan;
+		$data['loadtype'] = '2'; // 1: add soal. 2: preview soal
+		$this->load->view('addsoal',$data);	
+	}
 }

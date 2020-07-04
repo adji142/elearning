@@ -244,7 +244,7 @@
 		        filterPanel: { visible: true },
 		        headerFilter: { visible: true },
 	            paging: {
-	                enabled: false
+	                enabled: true
 	            },
 	            editing: {
 	                mode: "row",

@@ -9,7 +9,7 @@
 		<div class="table-agile-info">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-			      Daftar Siswa
+			      Management Soal dan Quis
 			    </div>
 			    <div class="row w3-res-tb">
 			    	<div class="col-md-12 w3ls-graph">
@@ -30,28 +30,44 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-	                <h4 class="modal-title">Tambah Guru</h4>
+	                <h4 class="modal-title">Tambah Soal / Quis</h4>
 	            </div>
 	            <div class="modal-body">
 	                <form class="form-horizontal" role="form" id="post_">
+	                    <input type="hidden" name="id" id="id" >
+	                    <input type="hidden" name="formtype" id="formtype" value="add">
 	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">NISN</label>
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Kode Soal</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NISN" name="NISN" placeholder="Nomer Induk Siswa Nasional" required="" autocomplete="off">
-	                            <input type="hidden" name="id" id="id" >
-	                            <input type="hidden" name="formtype" id="formtype" value="add">
+	                            <input type="text" class="form-control" id="KodeSoal" name="KodeSoal" placeholder="Nama Guru" required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">NIS</label>
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Mata Pelajaran</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NIS" name="NIS" placeholder="Nomer Induk Siswa" required="" autocomplete="off">
+	                        	<input list="listMapel" name="MapelID" id="MapelID" class="form-control" autocomplete="off">
+	                            <datalist id="listMapel" >
+	                            	<?php
+	                            		$rs = $this->db->query("select * from tmapel order by KodeMapel")->result();
+	                            		foreach ($rs as $key) {
+	                            			echo "<option value = '".$key->id."|".$key->NamaMapel."'>";
+	                            		}
+	                            	?>
+	                            </datalist>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Nama Siswa</label>
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Guru</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NamaSiswa" name="NamaSiswa" placeholder="Nama Siswa" required="" autocomplete="off">
+	                        	<input list="listGuru" name="NIKGuru" id="NIKGuru" class="form-control" autocomplete="off">
+	                            <datalist id="listGuru" >
+	                            	<?php
+	                            		$rs = $this->db->query("select * from tguru order by NamaGuru")->result();
+	                            		foreach ($rs as $key) {
+	                            			echo "<option value = '".$key->NomorIndukGuru."|".$key->NamaGuru."'>";
+	                            		}
+	                            	?>
+	                            </datalist>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
@@ -62,72 +78,22 @@
 	                            	<?php
 	                            		$rs = $this->db->query("select * from tkelas order by KodeKelas")->result();
 	                            		foreach ($rs as $key) {
-	                            			echo "<option value = '".$key->id." | ".$key->NamaKelas."'>";
+	                            			echo "<option value = '".$key->id."|".$key->NamaKelas."'>";
 	                            		}
 	                            	?>
 	                            </datalist>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Tempat Lahir</label>
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Waktu</label>
 	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="TempatLahir" name="TempatLahir" placeholder="Tempat Lahir" required="" autocomplete="off">
+	                            <input type="time" class="form-control" id="Waktu" name="Waktu"required="" autocomplete="off">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Tanggal Lahir</label>
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Keterangan</label>
 	                        <div class="col-lg-8">
-	                            <input type="date" class="form-control" id="TanggalLahir" name="TanggalLahir" placeholder="Tanggal Lahir" required="" autocomplete="off">
-	                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Jenis Kelamin</label>
-	                        <div class="col-lg-8">
-	                            <select id="Gender" name="Gender" class="form-control" required="" autocomplete="off">
-	                            	<option value="L">Laki - Laki</option>
-	                            	<option value="P">Perempuan</option>
-	                            </select>
-	                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Alamat</label>
-	                        <div class="col-lg-8">
-	                        	<textarea class="form-control" id="Alamat" name="Alamat" placeholder="No. Telepon" required="">
-	                        	</textarea>
-	                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Email</label>
-	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="Email" name="Email" placeholder="Email" required="">
-	                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Nomor Telepon</label>
-	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="NoTlp" name="NoTlp" placeholder="No. Telepon" required="" autocomplete="off">
-	                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Agama</label>
-	                        <div class="col-lg-8">
-	                            <select id="Agama" name="Agama" class="form-control" required="" autocomplete="off">
-	                            	<option value="Kristen">Kristen</option>
-	                            	<option value="Islam">Islam</option>
-	                            	<option value="Hindu">Hindu</option>
-	                            	<option value="Budha">Budha</option>
-	                            	<option value="Lainnya">Lainnya</option>
-	                            </select>
-	                        </div>
-	                    </div>
-	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Foto</label>
-	                        <div class="col-lg-8">
-	                            <input type="file" id="bannerimage" name="bannerimage" />
-					              <img src="" id="profile-img-tag" width="200" />
-					              <span class="help-block">Max Resolution 800 x 600</span>
-					              <textarea id="image" name="image" style="display: none;"></textarea>
-					              <!-- display: none; -->
+	                            <textarea class="form-control" id="Keterangan" name="Keterangan" placeholder="Keterangan" required=""></textarea>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
@@ -150,10 +116,9 @@
 	$(function () {
 		var _URL = window.URL || window.webkitURL;
 		$(document).ready(function () {
-			// $('#NomorIndukGuru').attr('readonly',true);
 			$.ajax({
               type: "post",
-              url: "<?=base_url()?>Siswa/read",
+              url: "<?=base_url()?>Managementsoal/readtopik",
               data: {'id':''},
               dataType: "json",
               success: function (response) {
@@ -164,39 +129,10 @@
 		$('.close').click(function() {
             location.reload();
         });
-		$("#bannerimage").change(function(){
-	      var file = $(this)[0].files[0];
-	      img = new Image();
-	      img.src = _URL.createObjectURL(file);
-	      var imgwidth = 0;
-	      var imgheight = 0;
-	      img.onload = function () {
-	        imgwidth = this.width;
-	        imgheight = this.height;
-	        $('#width').val(imgwidth);
-	        $('#height').val(imgheight);
-	      }
-	      readURL(this);
+		$("#Attachment").change(function(){
+	      // readURL(this);
 	      encodeImagetoBase64(this);
 	      // alert("Current width=" + imgwidth + ", " + "Original height=" + imgheight);
-	    });
-	    $('.viewImage').click(function () {
-	      var id = $(this).attr("id");
-	      var table = 'sitebanner';
-	      $.ajax({
-	        type    :'post',
-	        url     : '<?=base_url()?>Root/Apps/viewData',
-	        data    : {id:id,table:table},
-	        dataType: 'json',
-	        success : function (response) {
-	          if(response.success == true){
-	            $.each(response.data,function (k,v) {
-	              $('#preview-image').attr('src', v.image);
-	            });
-	            $('#modalViewImage').modal('show');
-	          }
-	        }
-	      });
 	    });
         $('#post_').submit(function (e) {
             $('#btn_Save').text('Tunggu Sebentar.....');
@@ -207,7 +143,7 @@
 
             $.ajax({
                 type    :'post',
-                url     : '<?=base_url()?>Siswa/CRUD',
+                url     : '<?=base_url()?>Managementsoal/CRUDTopik',
                 data    : me.serialize(),
                 dataType: 'json',
                 success : function (response) {
@@ -235,67 +171,9 @@
                         $('#btn_Save').attr('disabled',false);
                     });
                   }
-                },
-                statusCode: {
-			        500: function() {
-			          $('#modal_').modal('toggle');
-	                    Swal.fire({
-	                      type: 'error',
-	                      title: 'Woops...',
-	                      text: response.message,
-	                      // footer: '<a href>Why do I have this issue?</a>'
-	                    }).then((result)=>{
-	                        $('#modal_').modal('show');
-	                        $('#btn_Save').text('Save');
-	                        $('#btn_Save').attr('disabled',false);
-	                    });
-			        }
-			      }
+                }
               });
         });
-        $('#NISN').focusout(function () {
-        	var where_field = 'NISN';
-            var where_value = $('#NISN').val();
-            var table = 'tsiswa';
-            $.ajax({
-              type: "post",
-              url: "<?=base_url()?>Siswa/read",
-              data: {'NISN':$('#NISN').val()},
-              dataType: "json",
-              success: function (response) {
-                $.each(response.data,function (k,v) {
-                    $('#NISN').val(v.NISN);
-                    $('#NIS').val(v.NIS);
-					$('#NamaSiswa').val(v.NamaSiswa);
-					$('#KelasID').val(v.KodeKelas + ' | '+v.NamaKelas).change();
-					$('#Email').val(v.Email);
-					$('#NoTlp').val(v.NoTlp);
-					$('#Alamat').val(v.Alamat);
-					$('#image').val(v.Foto);
-					$('#TempatLahir').val(v.TempatLahir);
-					$('#TanggalLahir').val(v.TanggalLahir);
-					$('#Gender').val(v.Gender).change();
-					$('#Agama').val(v.Agama).change();
-
-                    $('#id').val(v.id);
-                    $('#formtype').val("edit");
-
-                    $('#NISN').attr('readonly',true);
-
-                    img = new Image();
-		            img.src = v.Foto;
-		            var imgwidth = 0;
-		            var imgheight = 0;
-		            img.onload = function () {
-		                imgwidth = this.width;
-		                imgheight = this.height;
-		                $('#width').val(imgwidth);
-		                $('#height').val(imgheight);
-		              }
-                  });
-              }
-            });
-        })
         function readURL(input) {
 		    if (input.files && input.files[0]) {
 		      var reader = new FileReader();
@@ -307,62 +185,49 @@
 		    }
 		  }
 		  function encodeImagetoBase64(element) {
-		    $('#image').val('');
+		    $('#FileItem').val('');
 		      var file = element.files[0];
 		      var reader = new FileReader();
 		      reader.onloadend = function() {
 		        // $(".link").attr("href",reader.result);
 		        // $(".link").text(reader.result);
-		        $('#image').val(reader.result);
+		        $('#FileItem').val(reader.result);
 		      }
 		      reader.readAsDataURL(file);
 		  }
         function GetData(id) {
             var where_field = 'id';
             var where_value = id;
-            var table = 'tguru';
+            var table = 'tkelas';
             $.ajax({
               type: "post",
-              url: "<?=base_url()?>Siswa/read",
+              url: "<?=base_url()?>Managementsoal/readtopik",
               data: {'id':id},
               dataType: "json",
               success: function (response) {
                 $.each(response.data,function (k,v) {
-                    $('#NISN').val(v.NISN);
-                    $('#NIS').val(v.NIS);
-					$('#NamaSiswa').val(v.NamaSiswa);
-					$('#KelasID').val(v.KodeKelas + ' | '+v.NamaKelas).change();
-					$('#Email').val(v.Email);
-					$('#NoTlp').val(v.NoTlp);
-					$('#Alamat').val(v.Alamat);
-					$('#image').val(v.Foto);
-					$('#TempatLahir').val(v.TempatLahir);
-					$('#TanggalLahir').val(v.TanggalLahir);
-					$('#Gender').val(v.Gender).change();
-					$('#Agama').val(v.Agama).change();
+                    console.log(v.Waktu);
+                    $('#KodeSoal').val(v.KodeSoal);
+                    $('#MapelID').val(v.KodeMapel + '|' + v.NamaMapel);
+					$('#NIKGuru').val(v.NIKGuru + '|' + v.NamaGuru);
+					$('#KelasID').val(v.KodeKelas + '|' + v.NamaKelas);
+					$('#Keterangan').val(v.Keterangan);
+					$('#Waktu').val(v.WaktuSoal);
 
                     $('#id').val(v.id);
                     $('#formtype').val("edit");
 
-                    $('#NISN').attr('readonly',true);
-
-                    img = new Image();
-		            img.src = v.Foto;
-		            var imgwidth = 0;
-		            var imgheight = 0;
-		            img.onload = function () {
-		                imgwidth = this.width;
-		                imgheight = this.height;
-		                $('#width').val(imgwidth);
-		                $('#height').val(imgheight);
-		              }
+                    $('#modal_').modal('show');
                   });
-                $('#modal_').modal('show');
               }
             });
         }
 		function bindGrid(data) {
-
+			var x = $('#hakakes').val();
+			var allowAdding = true;
+			if (x == 3) {
+				allowAdding = false;
+			}
 	        $("#gridContainer").dxDataGrid({
 	            allowColumnResizing: true,
 	            dataSource: data,
@@ -380,9 +245,9 @@
 	            },
 	            editing: {
 	                mode: "row",
-	                allowAdding:true,
-	                allowUpdating: true,
-	                allowDeleting: true,
+	                allowAdding: allowAdding,
+	                allowUpdating: allowAdding,
+	                allowDeleting: allowAdding,
 	                texts: {
 	                    confirmDeleteMessage: ''  
 	                }
@@ -397,50 +262,49 @@
 	                fileName: "Daftar Pelayan"
 	            },
 	            columns: [
-	                {
-	                    dataField: "NISN",
-	                    caption: "Nomor Induk Siswa Nasional",
-	                    allowEditing:false
-	                },
-	                {
-	                    dataField: "NIS",
-	                    caption: "Nomor Induk Siswa",
-	                    allowEditing:false
-	                },
-	                {
-	                    dataField: "NamaSiswa",
-	                    caption: "Nama Siswa",
+	            	{
+	                    dataField: "KodeSoal",
+	                    caption: "Kode Soal",
 	                    allowEditing:false
 	                },
 	                {
 	                    dataField: "NamaKelas",
-	                    caption: "Kelas",
+	                    caption: "Nama Kelas",
 	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "TempatLahir",
-	                    caption: "Tempat Lahir",
+	                    dataField: "NamaMapel",
+	                    caption: "Mata Pelajaran",
 	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "TanggalLahir",
-	                    caption: "Tanggal Lahir",
+	                    dataField: "Keterangan",
+	                    caption: "Deskripsi Soal",
 	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "Gender",
-	                    caption: "Jenis Kelamin",
+	                    dataField: "Createdon",
+	                    caption: "Dibuat Tanggal",
 	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "Agama",
-	                    caption: "Agama",
+	                    dataField: "Createdby",
+	                    caption: "Dibuat Oleh",
 	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "NoTlp",
-	                    caption: "No. Tlp",
+	                    dataField: "Waktu",
+	                    caption: "Waktu",
 	                    allowEditing:false
+	                },
+	                {
+	                    dataField: "FileItem",
+	                    caption: "Action",
+	                    allowEditing:false,
+	                    cellTemplate: function(cellElement, cellInfo) {
+	                    	console.log(cellInfo);
+		                    cellElement.append("<a href = '<?=base_url()?>addsoal/"+cellInfo.data.id+"' class='badge badge-primary'>Buat Soal</a> <a href = '<?=base_url()?>viewsoal/"+cellInfo.data.id+"' class='badge badge-success'>Lihat Soal</a><br> <a href = 'http://localhost/elearning/Managementsoal/reviewsoal/"+cellInfo.data.id+"' class='badge badge-danger'>Peserta & Koreksi</a>");
+		                }
 	                },
 	            ],
 	            onEditingStart: function(e) {
@@ -484,7 +348,7 @@
 
 	                    $.ajax({
 	                        type    :'post',
-	                        url     : '<?=base_url()?>Siswa/CRUD',
+	                        url     : '<?=base_url()?>Managementsoal/CRUDTopik',
 	                        data    : {'id':id,'formtype':'delete'},
 	                        dataType: 'json',
 	                        success : function (response) {

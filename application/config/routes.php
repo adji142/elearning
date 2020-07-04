@@ -58,3 +58,6 @@ $route['kelas'] = 'Home/kelas';
 $route['guru'] = 'Home/guru';
 $route['siswa'] = 'Home/siswa';
 $route['pembelajaran'] = 'Home/pembelajaran';
+$route['soal'] = 'Home/soal';
+$route['addsoal/(:num)'] = 'Home/addsoal/$1';
+$route['viewsoal/(:num)'] = 'Home/viewsoal/$1';
