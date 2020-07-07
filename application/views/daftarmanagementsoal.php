@@ -302,10 +302,27 @@
 	                    caption: "Action",
 	                    allowEditing:false,
 	                    cellTemplate: function(cellElement, cellInfo) {
-	                    	console.log(cellInfo);
-		                    cellElement.append("<a href = '<?=base_url()?>addsoal/"+cellInfo.data.id+"' class='badge badge-primary'>Buat Soal</a> <a href = '<?=base_url()?>viewsoal/"+cellInfo.data.id+"' class='badge badge-success'>Lihat Soal</a><br> <a href = 'http://localhost/elearning/Managementsoal/reviewsoal/"+cellInfo.data.id+"' class='badge badge-danger'>Peserta & Koreksi</a>");
+	                    	var LinkAccess = "";
+	                    	console.log();
+	                    	if (x == 3) {
+	                    		if (cellInfo.data.Jml > 0) {
+	                    			LinkAccess = "<span class='badge badge-primary'>Sudah diKerjakan</span>";
+	                    		}
+	                    		else{
+	                    			LinkAccess = "<a href = '<?=base_url()?>jawabsoal/"+cellInfo.data.id+"' class='badge badge-primary'>Kerjakan</a>";
+	                    		}
+	                    	}
+	                    	else{
+	                    		LinkAccess = "<a href = '<?=base_url()?>addsoal/"+cellInfo.data.id+"' class='badge badge-primary'>Buat Soal</a> <a href = '<?=base_url()?>viewsoal/"+cellInfo.data.id+"' class='badge badge-success'>Lihat Soal</a><br> <a href = '<?=base_url() ?>reviewpeserta/"+cellInfo.data.id+"' class='badge badge-danger'>Peserta & Koreksi</a>";
+	                    	}
+		                    cellElement.append(LinkAccess);
 		                }
 	                },
+	                // {
+	                //     dataField: "Nilai",
+	                //     caption: "Nilai",
+	                //     allowEditing:false
+	                // },
 	            ],
 	            onEditingStart: function(e) {
 	                GetData(e.data.id);

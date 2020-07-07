@@ -11,7 +11,7 @@
  Target Server Version : 100406
  File Encoding         : 65001
 
- Date: 05/07/2020 01:28:15
+ Date: 07/07/2020 23:48:40
 */
 
 SET NAMES utf8mb4;
@@ -50,8 +50,8 @@ INSERT INTO `permission` VALUES (7, 'Soal Latihan / Tugas', 'soal', 'fa-bell-o',
 INSERT INTO `permission` VALUES (8, 'Daftar User', NULL, 'fa-book', '0', b'0', b'0', 17, b'0', NULL, NULL, NULL);
 INSERT INTO `permission` VALUES (9, 'Profile', NULL, 'fa-user-o', '0', b'0', b'0', 35, b'1', NULL, NULL, NULL);
 INSERT INTO `permission` VALUES (10, 'Materi', 'pembelajaran', 'fa-book', '0', b'0', b'0', 36, b'1', NULL, NULL, NULL);
-INSERT INTO `permission` VALUES (11, 'Soal Latihan / Tugas Murid', NULL, 'fa-bell-o', '0', b'0', b'0', 37, b'1', NULL, NULL, NULL);
-INSERT INTO `permission` VALUES (12, 'Nilai', NULL, 'fa-area-chart', '0', b'0', b'0', 38, b'1', NULL, NULL, NULL);
+INSERT INTO `permission` VALUES (11, 'Soal Latihan / Tugas Murid', 'soal', 'fa-bell-o', '0', b'0', b'0', 37, b'1', NULL, NULL, NULL);
+INSERT INTO `permission` VALUES (12, 'Nilai', NULL, 'fa-area-chart', '0', b'0', b'0', 38, b'0', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for permissionrole
@@ -139,12 +139,15 @@ CREATE TABLE `tjawaban`  (
   `Score` decimal(11, 2) NOT NULL,
   `AnswerTime` time(6) NOT NULL,
   `Status` bit(1) NOT NULL DEFAULT b'0' COMMENT '0 : available, 1 : Submited',
+  `TopikID` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tjawaban
 -- ----------------------------
+INSERT INTO `tjawaban` VALUES (3, '200001', 2, 'Test', 70.00, '00:00:00.000000', b'1', 1);
+INSERT INTO `tjawaban` VALUES (4, '200001', 4, 'Test  XXXXX', 90.00, '00:00:00.000000', b'1', 1);
 
 -- ----------------------------
 -- Table structure for tkelas
@@ -197,12 +200,13 @@ CREATE TABLE `topiksoal`  (
   `Createdby` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `isactive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of topiksoal
 -- ----------------------------
-INSERT INTO `topiksoal` VALUES (1, 'SL00', 3, 2, '1001', '00:05:00.000000', 'Test 2', '2020-07-04 10:35:26.000000', 'admin', b'1');
+INSERT INTO `topiksoal` VALUES (1, 'SL00', 3, 2, '1001', '00:01:00.000000', 'Test 2', '2020-07-04 10:35:26.000000', 'admin', b'1');
+INSERT INTO `topiksoal` VALUES (2, 'SL001', 2, 3, '1002', '00:05:00.000000', 'Soal Tugas', '2020-07-06 07:56:58.000000', 'admin', b'1');
 
 -- ----------------------------
 -- Table structure for tpembelajaran

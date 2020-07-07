@@ -71,4 +71,29 @@ class home extends CI_Controller {
 		$data['loadtype'] = '2'; // 1: add soal. 2: preview soal
 		$this->load->view('addsoal',$data);	
 	}
+	public function jawabsoal($value)
+	{
+		$rs = $this->ModelsExecuteMaster->FindData(array('id'=>$value),'topiksoal');
+		$data['topikid'] = $value;
+		$data['topikname'] = $rs->row()->Keterangan;
+		$data['loadtype'] = '1'; // 1: Jawab soal. 2: Koreksi soal
+		$this->load->view('jawabsoal',$data);	
+	}
+	public function koreksisoal($value,$key)
+	{
+		$rs = $this->ModelsExecuteMaster->FindData(array('id'=>$value),'topiksoal');
+		$data['topikid'] = $value;
+		$data['topikname'] = $rs->row()->Keterangan;
+		$data['loadtype'] = '2'; // 1: Jawab soal. 2: Koreksi soal
+		$data['NISN'] = $key;
+		$this->load->view('jawabsoal',$data);	
+	}
+	public function reviewpeserta($value)
+	{
+		$rs = $this->ModelsExecuteMaster->FindData(array('id'=>$value),'topiksoal');
+		$data['topikid'] = $value;
+		$data['topikname'] = $rs->row()->Keterangan;
+		$data['loadtype'] = '1'; // 1: Jawab soal. 2: Koreksi soal
+		$this->load->view('daftarpesertaujian',$data);	
+	}
 }

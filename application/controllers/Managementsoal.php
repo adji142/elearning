@@ -38,11 +38,22 @@ class Managementsoal extends CI_Controller {
 			$sql = "SELECT 
 						a.*,b.id KodeMapel,b.NamaMapel,
 						c.id KodeKelas,c.NamaKelas,
-						d.NamaGuru,Cast(a.Waktu AS Time) WaktuSoal
+						d.NamaGuru,Cast(a.Waktu AS Time) WaktuSoal,
+						ROUND(time_to_sec(Waktu)) InMinutes,
+						COALESCE(e.Jml,0) Jml,
+						ROUND(e.Nilai,2) Nilai
 					FROM topiksoal a
 					LEFT JOIN tmapel b on a.MapelID = b.id
 					LEFT JOIN tkelas c on a.KelasID = c.id
 					LEFT JOIN tguru d on a.NIKGuru  =d.NomorIndukGuru
+					LEFT JOIN (
+						SELECT 
+							x.topikID,
+							COUNT(*) Jml,
+							SUM(COALESCE(x.Score,0)) / COUNT(*) Nilai
+						FROM tjawaban x
+						GROUP BY x.topikID
+					) e on a.id = e.topikID
 				WHERE a.isActive = 1 AND a.id = ".$id." ";
 			$rs = $this->ModelsExecuteMaster->FindData(array('NomorIndukGuru'=>$username),'tguru');
 			if ($rs->num_rows() > 0) {
@@ -57,11 +68,22 @@ class Managementsoal extends CI_Controller {
 			$sql = "SELECT 
 				a.*,b.id KodeMapel,b.NamaMapel,
 				c.id KodeKelas,c.NamaKelas,
-				d.NamaGuru,Cast(a.Waktu AS Time) WaktuSoal
+				d.NamaGuru,Cast(a.Waktu AS Time) WaktuSoal,
+				ROUND(time_to_sec(Waktu)) InMinutes,
+				COALESCE(e.Jml,0) Jml,
+				ROUND(e.Nilai,2) Nilai
 			FROM topiksoal a
 			LEFT JOIN tmapel b on a.MapelID = b.id
 			LEFT JOIN tkelas c on a.KelasID = c.id
 			LEFT JOIN tguru d on a.NIKGuru  =d.NomorIndukGuru
+			LEFT JOIN (
+				SELECT 
+					x.topikID,
+					COUNT(*) Jml,
+					SUM(COALESCE(x.Score,0)) / COUNT(*) Nilai
+				FROM tjawaban x
+				GROUP BY x.topikID
+			) e on a.id = e.topikID
 			WHERE a.isActive = 1 ";
 
 			$rs = $this->ModelsExecuteMaster->FindData(array('NomorIndukGuru'=>$username),'tguru');
@@ -251,7 +273,11 @@ class Managementsoal extends CI_Controller {
 			$rs = $this->ModelsExecuteMaster->FindData(array('id'=>$id,'isActive'=>1),'tsoal');
 		}
 		else{
-			$rs = $this->db->query('SELECT * FROM tsoal where topikID = '.$topikID.' AND isActive =1 order by Createdon ASC');
+			$rs = $this->db->query('SELECT a.id,a.topikID,a.DeskripsiSoal,b.NISN,b.SoalID,
+				b.Jawaban,b.Score,b.AnswerTime
+			 FROM tsoal a 
+				LEFT JOIN tjawaban b on b.SoalID = a.id
+			where a.topikID = '.$topikID.' AND a.isActive =1 order by Createdon ASC');
 		}
 
 		if ($rs->num_rows()) {
@@ -260,6 +286,155 @@ class Managementsoal extends CI_Controller {
 		}
 		else{
 			$data['message'] = "Row Empty";
+		}
+		echo json_encode($data);
+	}
+	public function CRUDJawab()
+	{
+		$data = array('success' => false ,'message'=>array(),'data' => array());
+
+		$NISN = $this->session->userdata('username');
+
+		$SoalID = $this->input->post('SoalID');
+		$Jawaban = $this->input->post('Jawaban');
+		$Score = $this->input->post('Score');;
+		$AnswerTime = $this->input->post('AnswerTime');
+		$topikid = $this->input->post('topikid');
+		$Status = $this->input->post('Status');
+
+		$param = array(
+			'NISN'			=>$NISN,
+			'SoalID'		=>$SoalID,
+			'Jawaban'		=>$Jawaban,
+			'Score'			=>$Score,
+			'AnswerTime'	=>$AnswerTime,
+			'topikid'		=>$topikid,
+			'Status'		=>$Status
+		);
+
+		$this->db->trans_begin();
+			try {
+				$rs = $this->ModelsExecuteMaster->ExecInsert($param,'tjawaban');
+				if ($rs) {
+					$this->db->trans_commit();
+					$data['success'] = true;
+				}
+				else{
+					$data['success'] = true;
+					$data['message'] = 'Gagal Menambahkan Jawaban';
+					goto jump;
+				}
+			} catch (Exception $e) {
+				jump:
+				$this->db->trans_rollback();
+			}
+		echo json_encode($data);
+	}
+	public function RemoveJawab()
+	{
+		$data = array('success' => false ,'message'=>array(),'data' => array());
+
+		$NISN = $this->session->userdata('username');
+		$topikid = $this->input->post('topikid');
+
+		$param = array(
+			'NISN'			=>$NISN,
+			'topikid'		=>$topikid
+		);
+		$this->db->trans_begin();
+		try {
+			$JawabanCount = $this->ModelsExecuteMaster->FindData(array('NISN'=>$NISN,'topikid'=>$topikid),'tjawaban');
+			if ($JawabanCount->num_rows() > 0) {
+				$removingdata = $this->ModelsExecuteMaster->DeleteData(array('NISN'=>$NISN,'topikid'=>$topikid),'tjawaban');
+				if ($removingdata) {
+					$this->db->trans_commit();
+					$data['success'] = true;
+				}
+				else{
+					$data['success'] = true;
+					$data['message'] = 'Gagal Remove Row';
+					goto jump;
+				}
+			}
+			else{
+				$data['success'] = true;
+
+			}
+		} catch (Exception $e) {
+			jump:
+			$this->db->trans_rollback();
+		}
+		echo json_encode($data);
+	}
+	public function GetPeserta()
+	{
+		$data = array('success' => false ,'message'=>array(),'data' => array());
+
+		$username = $this->session->userdata('username');
+		$topikid = $this->input->post('topikid');
+
+		$SQL = 'SELECT 
+					DISTINCT c.NISN,c.NamaSiswa,d.NamaKelas,b.id,Round(x.Nilai,2) Nilai
+				FROM tjawaban a
+				INNER JOIN topiksoal b on a.topikID = b.id
+				INNER JOIN tsiswa c on a.NISN = c.NISN
+				INNER JOIN tkelas d on c.KelasID = d.id
+				LEFT JOIN (
+					SELECT x.topikID,x.NISN,SUM(x.Score) / count(*) Nilai FROM tjawaban x
+					GROUP by x.topikID,x.NISN
+				) x on x.topikID = a.topikID AND x.NISN = a.NISN
+				WHERE a.`Status` = 1 AND b.id = '.$topikid ;
+		$rs = $this->ModelsExecuteMaster->FindData(array('NomorIndukGuru'=>$username),'tguru');
+		if ($rs->num_rows() > 0) {
+			$SQL .= " AND a.NIKGuru = '".$username."' ";
+		}
+		$rs = $this->db->query($SQL);
+		$data['success'] = true;
+		$data['data'] = $rs->result();
+
+		echo json_encode($data);
+	}
+	public function GetJawaban()
+	{
+		$data = array('success' => false ,'message'=>array(),'data' => array());
+		$NISN = $this->input->post('NISN');
+		$topikID = $this->input->post('topikID');
+
+		$rs = $this->ModelsExecuteMaster->FindData(array('NISN'=>$NISN,'TopikID'=>$topikID),'tjawaban');
+		if ($rs->num_rows() > 0) {
+			$data['success'] = true;
+			$data['data'] = $rs->result();
+		}
+		echo json_encode($data);
+	}
+	public function UpdateNilai()
+	{
+		$data = array('success' => false ,'message'=>array(),'data' => array());
+		
+		$NISN = $this->input->post('NISN');
+		$topikID = $this->input->post('TopikID');
+		$jawabid = $this->input->post('id');
+		$point = $this->input->post('point');
+
+		$where = array(
+			'NISN'		=> $NISN,
+			'TopikID'	=> $topikID,
+			'id'		=> $jawabid
+		);
+		$this->db->trans_begin();
+		try {
+			$rs = $this->ModelsExecuteMaster->ExecUpdate(array('Score'=>$point),$where,'tjawaban');
+			if ($rs) {
+				$this->db->trans_commit();
+				$data['success'] = true;
+			}
+			else{
+				$data['message'] = 'Gagal Update Score';
+				goto jump;
+			}
+		} catch (Exception $e) {
+			jump:
+			$this->db->trans_rollback();
 		}
 		echo json_encode($data);
 	}

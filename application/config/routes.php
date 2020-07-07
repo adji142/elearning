@@ -61,3 +61,6 @@ $route['pembelajaran'] = 'Home/pembelajaran';
 $route['soal'] = 'Home/soal';
 $route['addsoal/(:num)'] = 'Home/addsoal/$1';
 $route['viewsoal/(:num)'] = 'Home/viewsoal/$1';
+$route['jawabsoal/(:num)'] = 'Home/jawabsoal/$1';
+$route['reviewpeserta/(:num)'] = 'Home/reviewpeserta/$1';
+$route['koreksisoal/(:num)/(:any)'] = 'Home/koreksisoal/$1/$2';
