@@ -82,6 +82,7 @@ class Managementsoal extends CI_Controller {
 					COUNT(*) Jml,
 					SUM(COALESCE(x.Score,0)) / COUNT(*) Nilai
 				FROM tjawaban x
+				WHERE x.NISN = '".$username."'
 				GROUP BY x.topikID
 			) e on a.id = e.topikID
 			WHERE a.isActive = 1 ";
@@ -268,18 +269,23 @@ class Managementsoal extends CI_Controller {
 
 		$id = $this->input->post('id');
 		$topikID = $this->input->post('topikID');
+		$username = $this->session->userdata('username');
+		$NISN = $this->input->post('NISN');
+		$SQL="";
 
 		if ($topikID == '') {
 			$rs = $this->ModelsExecuteMaster->FindData(array('id'=>$id,'isActive'=>1),'tsoal');
 		}
 		else{
-			$rs = $this->db->query('SELECT a.id,a.topikID,a.DeskripsiSoal,b.NISN,b.SoalID,
-				b.Jawaban,b.Score,b.AnswerTime
-			 FROM tsoal a 
-				LEFT JOIN tjawaban b on b.SoalID = a.id
-			where a.topikID = '.$topikID.' AND a.isActive =1 order by Createdon ASC');
-		}
 
+			$SQL = "SELECT a.id,a.topikID,a.DeskripsiSoal,b.NISN,b.SoalID,
+							b.Jawaban,b.Score,b.AnswerTime
+						 FROM tsoal a 
+							LEFT JOIN tjawaban b on b.SoalID = a.id
+						where a.topikID = ".$topikID." AND a.isActive =1 AND b.NISN = '".$NISN."' order by Createdon ASC";
+		}
+		// var_dump($SQL);
+		$rs = $this->db->query($SQL);
 		if ($rs->num_rows()) {
 			$data['success'] = true;
 			$data['data'] = $rs->result();

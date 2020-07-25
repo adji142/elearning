@@ -114,7 +114,7 @@
               async :false,
               type: "post",
               url: "<?=base_url()?>Managementsoal/readsoal",
-              data: {'id':'',topikID:topikID},
+              data: {'id':'',topikID:topikID,'NISN':$('#NISN').val()},
               dataType: "json",
               success: function (response) {
                 // bindGrid(response.data);
