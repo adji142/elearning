@@ -16,11 +16,15 @@
             	<input type="hidden" name="loadtype" id="loadtype" value="<?php echo $loadtype; ?>">
               <input type="hidden" name="topikid" id="topikid" value="<?php echo $topikid; ?>">
               <input type="hidden" name="timeticker" id="timeticker">
-              <input type="hidden" name="NISN" id="NISN" value="<?php echo $NISN; ?>">
             	<?php 
-            		if ($loadtype == 1) {
+            		if ($loadtype == 1 && $hakakes <> 3) {
             			echo '<button class="btn btn-info" id="btnAddSoal"><span class="fa fa-plus"> Tambah Soal</span></button>';
             		}
+                else{
+                  if ($loadtype == 2) {
+                    echo '<input type="hidden" name="NISN" id="NISN" value="'.$NISN.'">';
+                  }
+                }
             	?>
             	<br><br><br>
               <center>
@@ -189,9 +193,13 @@
 			alert('');
 		});
     $('#_save').click(function () {
+      // alert('');
       var topikID = $('#topikID').val();
+      // console.log(topikID);
       var x =1;
-      if ($('#loadtype').val == 1) {
+
+      if ($('#loadtype').val() == 1) {
+        console.log("");
         $.ajax({
           async :false,
           type: "post",
@@ -214,7 +222,7 @@
                           async :false,
                           type    :'post',
                           url     : '<?=base_url()?>Managementsoal/CRUDJawab',
-                          data    : {'SoalID':v.id,'Jawaban':$('#jawab'+x).val(),'AnswerTime' : $('#timeticker').val(),'topikid':$('#topikid').val(),'Status':0},
+                          data    : {'SoalID':v.id,'Jawaban':$('#jawab'+x).val(),'AnswerTime' : $('#timeticker').val(),'topikid':$('#topikid').val(),'Status':0,'Score':0},
                           dataType: 'json',
                           success : function (response3) {
                             if(response3.success == true){

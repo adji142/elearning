@@ -11,7 +11,7 @@
  Target Server Version : 100406
  File Encoding         : 65001
 
- Date: 25/07/2020 12:28:17
+ Date: 25/07/2020 13:12:07
 */
 
 SET NAMES utf8mb4;
@@ -141,13 +141,18 @@ CREATE TABLE `tjawaban`  (
   `Status` bit(1) NOT NULL DEFAULT b'0' COMMENT '0 : available, 1 : Submited',
   `TopikID` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tjawaban
 -- ----------------------------
 INSERT INTO `tjawaban` VALUES (3, '200001', 2, 'Test', 70.00, '00:00:00.000000', b'1', 1);
 INSERT INTO `tjawaban` VALUES (4, '200001', 4, 'Test  XXXXX', 90.00, '00:00:00.000000', b'1', 1);
+INSERT INTO `tjawaban` VALUES (10, '200001', 5, '4', 90.00, '04:44:00.000000', b'1', 2);
+INSERT INTO `tjawaban` VALUES (11, '200001', 6, '6', 70.00, '04:44:00.000000', b'1', 2);
+INSERT INTO `tjawaban` VALUES (12, '200001', 7, '4', 0.00, '724:48:00.000000', b'1', 3);
+INSERT INTO `tjawaban` VALUES (13, '200001', 8, '8', 0.00, '724:48:00.000000', b'1', 3);
+INSERT INTO `tjawaban` VALUES (14, '200001', 9, '10', 0.00, '724:48:00.000000', b'1', 3);
 
 -- ----------------------------
 -- Table structure for tkelas
@@ -200,13 +205,14 @@ CREATE TABLE `topiksoal`  (
   `Createdby` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `isactive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of topiksoal
 -- ----------------------------
-INSERT INTO `topiksoal` VALUES (1, 'SL00', 3, 2, '1001', '00:01:00.000000', 'Test 2', '2020-07-04 10:35:26.000000', 'admin', b'1');
-INSERT INTO `topiksoal` VALUES (2, 'SL001', 2, 3, '1002', '00:05:00.000000', 'Soal Tugas', '2020-07-06 07:56:58.000000', 'admin', b'1');
+INSERT INTO `topiksoal` VALUES (1, 'SL00', 3, 2, '1001', '00:01:00.000000', 'Test 2', '2020-07-25 12:35:47.000000', 'admin', b'1');
+INSERT INTO `topiksoal` VALUES (2, 'SL001', 2, 2, '1002', '00:05:00.000000', 'Soal Tugas', '2020-07-06 07:56:58.000000', 'admin', b'1');
+INSERT INTO `topiksoal` VALUES (3, 'SL002', 2, 2, '1002', '12:05:00.000000', 'test', '2020-07-25 01:10:19.000000', 'admin', b'1');
 
 -- ----------------------------
 -- Table structure for tpembelajaran
@@ -274,7 +280,7 @@ CREATE TABLE `tsoal`  (
   `Createdon` datetime(6) NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tsoal
@@ -283,6 +289,11 @@ INSERT INTO `tsoal` VALUES (1, 1, 0, 'Siapakah Presiden RI yang pertama ? hayoo'
 INSERT INTO `tsoal` VALUES (2, 1, 0, 'Kapan proklamasi di lakukan ? sih', '', 'admin', '2020-07-05 01:02:04.000000', b'1');
 INSERT INTO `tsoal` VALUES (3, 1, 0, 'Siapa Bapak Pembangunan Indonesia', '', 'admin', '2020-07-05 01:03:21.000000', b'0');
 INSERT INTO `tsoal` VALUES (4, 1, 0, 'Dimanakah Proklamasi dilakukan ?', '', 'admin', '2020-07-05 01:03:44.000000', b'1');
+INSERT INTO `tsoal` VALUES (5, 2, 0, '1  + 1', '', 'admin', '2020-07-25 12:49:01.000000', b'1');
+INSERT INTO `tsoal` VALUES (6, 2, 0, '2 + 2', '', 'admin', '2020-07-25 12:49:08.000000', b'1');
+INSERT INTO `tsoal` VALUES (7, 3, 0, '2+2', '', 'admin', '2020-07-25 01:10:51.000000', b'1');
+INSERT INTO `tsoal` VALUES (8, 3, 0, '4+4', '', 'admin', '2020-07-25 01:10:57.000000', b'1');
+INSERT INTO `tsoal` VALUES (9, 3, 0, '5+5', '', 'admin', '2020-07-25 01:11:03.000000', b'1');
 
 -- ----------------------------
 -- Table structure for userrole
