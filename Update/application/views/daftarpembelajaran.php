@@ -9,7 +9,7 @@
 		<div class="table-agile-info">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-			      Management Soal dan Quis
+			      Pembelajaran
 			    </div>
 			    <div class="row w3-res-tb">
 			    	<div class="col-md-12 w3ls-graph">
@@ -30,18 +30,12 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-	                <h4 class="modal-title">Tambah Soal / Quis</h4>
+	                <h4 class="modal-title">Tambah Materi Kelas</h4>
 	            </div>
 	            <div class="modal-body">
 	                <form class="form-horizontal" role="form" id="post_">
 	                    <input type="hidden" name="id" id="id" >
 	                    <input type="hidden" name="formtype" id="formtype" value="add">
-	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Kode Soal</label>
-	                        <div class="col-lg-8">
-	                            <input type="text" class="form-control" id="KodeSoal" name="KodeSoal" placeholder="Nama Guru" required="" autocomplete="off">
-	                        </div>
-	                    </div>
 	                    <div class="form-group">
 	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Mata Pelajaran</label>
 	                        <div class="col-lg-8">
@@ -85,15 +79,24 @@
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Waktu</label>
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Deskripsi Singkat</label>
 	                        <div class="col-lg-8">
-	                            <input type="time" class="form-control" id="Waktu" name="Waktu"required="" autocomplete="off" >
+	                            <textarea class="form-control" id="ShortDesc" name="ShortDesc" placeholder="No. Telepon" required=""></textarea>
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Keterangan</label>
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Deskripsi Lengkap</label>
 	                        <div class="col-lg-8">
-	                            <textarea class="form-control" id="Keterangan" name="Keterangan" placeholder="Keterangan" required=""></textarea>
+	                            <textarea class="form-control" id="LongDesc" name="LongDesc" placeholder="No. Telepon" required=""></textarea>
+	                        </div>
+	                    </div>
+
+	                    <div class="form-group">
+	                        <label for="inputEmail1" class="col-lg-4 col-sm-4 control-label">Deskripsi Lengkap</label>
+	                        <div class="col-lg-8">
+	                            <input type="file" id="Attachment" name="Attachment" accept=".pdf , .doc , .docx" />
+	                            <textarea id="FileItem" name="FileItem" style=""></textarea>
+	                            <!-- display: none; -->
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
@@ -118,7 +121,7 @@
 		$(document).ready(function () {
 			$.ajax({
               type: "post",
-              url: "<?=base_url()?>Managementsoal/readtopik",
+              url: "<?=base_url()?>Pembelajaran/read",
               data: {'id':''},
               dataType: "json",
               success: function (response) {
@@ -143,7 +146,7 @@
 
             $.ajax({
                 type    :'post',
-                url     : '<?=base_url()?>Managementsoal/CRUDTopik',
+                url     : '<?=base_url()?>Pembelajaran/CRUD',
                 data    : me.serialize(),
                 dataType: 'json',
                 success : function (response) {
@@ -201,18 +204,18 @@
             var table = 'tkelas';
             $.ajax({
               type: "post",
-              url: "<?=base_url()?>Managementsoal/readtopik",
+              url: "<?=base_url()?>Pembelajaran/read",
               data: {'id':id},
               dataType: "json",
               success: function (response) {
                 $.each(response.data,function (k,v) {
-                    console.log(v.Waktu);
-                    $('#KodeSoal').val(v.KodeSoal);
+                    // console.log(v.KelompokUsaha);
                     $('#MapelID').val(v.KodeMapel + '|' + v.NamaMapel);
 					$('#NIKGuru').val(v.NIKGuru + '|' + v.NamaGuru);
 					$('#KelasID').val(v.KodeKelas + '|' + v.NamaKelas);
-					$('#Keterangan').val(v.Keterangan);
-					$('#Waktu').val(v.WaktuSoal);
+					$('#ShortDesc').val(v.ShortDesc);
+					$('#LongDesc').val(v.LongDesc);
+					$('#FileItem').val(v.FileItem);
 
                     $('#id').val(v.id);
                     $('#formtype').val("edit");
@@ -225,10 +228,8 @@
 		function bindGrid(data) {
 			var x = $('#hakakes').val();
 			var allowAdding = true;
-			var visibling = false;
 			if (x == 3) {
 				allowAdding = false;
-				visibling = true;
 			}
 	        $("#gridContainer").dxDataGrid({
 	            allowColumnResizing: true,
@@ -247,7 +248,7 @@
 	            },
 	            editing: {
 	                mode: "row",
-	                allowAdding: allowAdding,
+	                allowAdding:allowAdding,
 	                allowUpdating: allowAdding,
 	                allowDeleting: allowAdding,
 	                texts: {
@@ -264,11 +265,6 @@
 	                fileName: "Daftar Pelayan"
 	            },
 	            columns: [
-	            	{
-	                    dataField: "KodeSoal",
-	                    caption: "Kode Soal",
-	                    allowEditing:false
-	                },
 	                {
 	                    dataField: "NamaKelas",
 	                    caption: "Nama Kelas",
@@ -280,14 +276,13 @@
 	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "Nilai",
-	                    caption: "Nilai",
-	                    allowEditing:false,
-	                    visible: visibling
+	                    dataField: "NamaGuru",
+	                    caption: "Mata Guru",
+	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "Keterangan",
-	                    caption: "Deskripsi Soal",
+	                    dataField: "ShortDesc",
+	                    caption: "Deskripsi",
 	                    allowEditing:false
 	                },
 	                {
@@ -301,36 +296,14 @@
 	                    allowEditing:false
 	                },
 	                {
-	                    dataField: "Waktu",
-	                    caption: "Waktu",
-	                    allowEditing:false
-	                },
-	                {
 	                    dataField: "FileItem",
-	                    caption: "Action",
+	                    caption: "File",
 	                    allowEditing:false,
 	                    cellTemplate: function(cellElement, cellInfo) {
-	                    	var LinkAccess = "";
-	                    	console.log();
-	                    	if (x == 3) {
-	                    		if (cellInfo.data.Jml > 0) {
-	                    			LinkAccess = "<span class='badge badge-primary'>Sudah diKerjakan</span>";
-	                    		}
-	                    		else{
-	                    			LinkAccess = "<a href = '<?=base_url()?>jawabsoal/"+cellInfo.data.id+"' class='badge badge-primary'>Kerjakan</a>";
-	                    		}
-	                    	}
-	                    	else{
-	                    		LinkAccess = "<a href = '<?=base_url()?>addsoal/"+cellInfo.data.id+"' class='badge badge-primary'>Buat Soal</a> <a href = '<?=base_url()?>viewsoal/"+cellInfo.data.id+"' class='badge badge-success'>Lihat Soal</a><br> <a href = '<?=base_url() ?>reviewpeserta/"+cellInfo.data.id+"' class='badge badge-danger'>Peserta & Koreksi</a>";
-	                    	}
-		                    cellElement.append(LinkAccess);
+	                    	console.log(cellInfo);
+		                    cellElement.append("<a href = '"+cellInfo.data.FileItem+"'>Download File</a>");
 		                }
 	                },
-	                // {
-	                //     dataField: "Nilai",
-	                //     caption: "Nilai",
-	                //     allowEditing:false
-	                // },
 	            ],
 	            onEditingStart: function(e) {
 	                GetData(e.data.id);
@@ -373,7 +346,7 @@
 
 	                    $.ajax({
 	                        type    :'post',
-	                        url     : '<?=base_url()?>Managementsoal/CRUDTopik',
+	                        url     : '<?=base_url()?>Pembelajaran/CRUD',
 	                        data    : {'id':id,'formtype':'delete'},
 	                        dataType: 'json',
 	                        success : function (response) {
