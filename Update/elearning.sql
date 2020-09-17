@@ -11,7 +11,7 @@
  Target Server Version : 100210
  File Encoding         : 65001
 
- Date: 29/07/2020 21:35:28
+ Date: 05/08/2020 12:50:12
 */
 
 SET NAMES utf8mb4;
@@ -119,11 +119,12 @@ CREATE TABLE `tguru`  (
   `Agama` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`, `NomorIndukGuru`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tguru
 -- ----------------------------
+INSERT INTO `tguru` VALUES (1, '11', 'prasetyo aji', 1, 'prasetyoajiw@gmail.com', '123123', '123', 'admin', '2020-08-05 07:43:26', '', '123', '2020-08-05', 'L', 'Kristen', b'1');
 
 -- ----------------------------
 -- Table structure for tjawaban
@@ -140,11 +141,13 @@ CREATE TABLE `tjawaban`  (
   `TopikID` int(11) NOT NULL,
   `attachment` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tjawaban
 -- ----------------------------
+INSERT INTO `tjawaban` VALUES (1, '10001', 1, 'asd', 0.00, '04:54:00.000000', b'1', 1, '');
+INSERT INTO `tjawaban` VALUES (2, '10001', 2, 'asd', 0.00, '04:54:00.000000', b'1', 1, '');
 
 -- ----------------------------
 -- Table structure for tkelas
@@ -155,11 +158,12 @@ CREATE TABLE `tkelas`  (
   `KodeKelas` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `NamaKelas` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tkelas
 -- ----------------------------
+INSERT INTO `tkelas` VALUES (1, '1', '7a');
 
 -- ----------------------------
 -- Table structure for tmapel
@@ -170,11 +174,12 @@ CREATE TABLE `tmapel`  (
   `KodeMapel` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `NamaMapel` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tmapel
 -- ----------------------------
+INSERT INTO `tmapel` VALUES (1, '1', 'Mat');
 
 -- ----------------------------
 -- Table structure for topiksoal
@@ -192,11 +197,12 @@ CREATE TABLE `topiksoal`  (
   `Createdby` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `isactive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of topiksoal
 -- ----------------------------
+INSERT INTO `topiksoal` VALUES (1, 'SL001', 1, 1, '11', '00:05:00.000000', 'Test', '2020-08-05 07:44:37.000000', 'admin', b'1');
 
 -- ----------------------------
 -- Table structure for tpembelajaran
@@ -242,11 +248,12 @@ CREATE TABLE `tsiswa`  (
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   `Foto` longtext CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tsiswa
 -- ----------------------------
+INSERT INTO `tsiswa` VALUES (1, '10001', '10001', 'Prasetyo Aji', 1, 'asd', '2020-08-05', 'L', 'asd', 'prasetyoajiw@gmail.com', '123', 'Kristen', 'admin', '2020-08-05 07:44:07', b'1', '');
 
 -- ----------------------------
 -- Table structure for tsoal
@@ -262,11 +269,13 @@ CREATE TABLE `tsoal`  (
   `Createdon` datetime(6) NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tsoal
 -- ----------------------------
+INSERT INTO `tsoal` VALUES (1, 1, 0, 'soal', '', 'admin', '2020-08-05 07:44:51.000000', b'1');
+INSERT INTO `tsoal` VALUES (2, 1, 0, 'soal 2', '', 'admin', '2020-08-05 07:45:01.000000', b'1');
 
 -- ----------------------------
 -- Table structure for userrole
@@ -299,6 +308,8 @@ INSERT INTO `userrole` VALUES (70, 2);
 INSERT INTO `userrole` VALUES (71, 2);
 INSERT INTO `userrole` VALUES (72, 2);
 INSERT INTO `userrole` VALUES (73, 3);
+INSERT INTO `userrole` VALUES (74, 2);
+INSERT INTO `userrole` VALUES (75, 3);
 
 -- ----------------------------
 -- Table structure for users
@@ -319,12 +330,14 @@ CREATE TABLE `users`  (
   `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 76 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (14, 'admin', 'admin', '440308e0a299d722ebc5a9459a56d27adffc7ad28688d4471fdc1c7a8324f9a5cabdcd25bae8fe71b65837f6dd33fd1a9187ff4e2b2fea10e88289b70fdb79a221Nz7VN+sVNcNv1J/4lhqE9nfn5cpZTw8zhp2ge4pY0=', 'mnl', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `users` VALUES (43, 'operator', 'Operator', 'a9bdd47d7321d4089b3b00561c9c621848bd6f6e2f745a53d54913d613789c23945b66de6ded1eb336a7d526f9349a9d964d6f6c3a40e2ac90b4b16c0121f7895Xg53McbkyQ/NmW60Sf4cu3wJsi/8cyZXxeXV7g6b04=', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (74, '11', 'prasetyo aji', '253b4a8d75d0edfe69b4c0f2cc2467872dd90b4a7e70b57b5aa17c22c1f5287f85151600d6a46cc20b1018ce55976aa5b7225472bf4e32bf2be5c2030f732105LZuwVo14hYmHLGbVcLuWDbxIQYLXjba5D5fEv3slG5E=', 'admin', '2020-08-05 07:43:26', 2, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` VALUES (75, '10001', 'Prasetyo Aji', 'c50cb4eff1f0189c9ca2e75fecefe0e9f128601167e40b7f645ab6cbff2e462b05a67af96b7b2df38b9d3896e699a9b73d1025d391072e80182a4aeb9eedad930qvDcZ7DX5VwtNrYoWNBOZ6uGeNdQg1OoxoppE4owmE=', 'admin', '2020-08-05 07:44:07', 3, NULL, NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

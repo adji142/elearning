@@ -398,7 +398,7 @@ class Managementsoal extends CI_Controller {
 				WHERE a.`Status` = 1 AND b.id = '.$topikid ;
 		$rs = $this->ModelsExecuteMaster->FindData(array('NomorIndukGuru'=>$username),'tguru');
 		if ($rs->num_rows() > 0) {
-			$SQL .= " AND a.NIKGuru = '".$username."' ";
+			$SQL .= " AND b.NIKGuru = '".$username."' ";
 		}
 		$rs = $this->db->query($SQL);
 		$data['success'] = true;
